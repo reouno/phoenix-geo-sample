@@ -20,7 +20,8 @@ defmodule GeoSampleWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", GeoSampleWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", GeoSampleWeb do
+    pipe_through :api
+    resources "/posts", PostController, except: [:new, :edit]
+  end
 end
