@@ -11,11 +11,20 @@ defmodule GeoSampleWeb.PostView do
   end
 
   def render("post.json", %{post: post}) do
-    {lat, lon} = post.location.coordinates
-    %{id: post.id,
-      username: post.username,
-      content: post.content,
-      latitude: lat,
-      longitude: lon}
+    case post.location do
+      nil ->
+        %{id: post.id,
+          username: post.username,
+          content: post.content,
+          latitude: nil,
+          longitude: nil}
+      _ ->
+        {lat, lon} = post.location.coordinates
+        %{id: post.id,
+          username: post.username,
+          content: post.content,
+          latitude: lat,
+          longitude: lon}
+    end
   end
 end
